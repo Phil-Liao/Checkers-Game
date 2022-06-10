@@ -17,6 +17,22 @@ FONT = pygame.font.SysFont("Arial", 20)
 
 
 
+
+JOIN_BUTTON = None
+QUIT_GAME_BUTTON = None
+button_names = [JOIN_BUTTON, QUIT_GAME_BUTTON]
+
+
+def buttons(x_pos, y_pos):
+    for i in range(button_names):
+        if button_names[i].click(x_pos, y_pos):
+            if button_names[i] == JOIN_BUTTON:
+                #send to server: Join game
+            elif button_names[i] == QUIT_GAME_BUTTON:
+                #send to server: Quit game
+
+        
+
 def draw_background(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, footer_color = (255, 255, 255), divider_color = (0, 0, 0), background_board_color=(186, 140, 99), background_square_color=(0, 0, 0)):
 
     #print("[DRAWING] Drawing board color...")
@@ -45,7 +61,11 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-    
+    #if pygame.mouse.get_pressed[0]:
+    #    pass
+
+
+
     #print("[UPDATING] Updating display")
     draw_background(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, colors["WHITE"], colors["SILVER"], colors["WOOD"], colors["BLACK"])
     pygame.display.update()
