@@ -20,7 +20,7 @@ FONT = pygame.font.SysFont("Arial", 20)
 def draw_background(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, footer_color = (255, 255, 255), divider_color = (0, 0, 0), background_board_color=(186, 140, 99), background_square_color=(0, 0, 0)):
 
     #print("[DRAWING] Drawing board color...")
-    WIN.fill(background_board_color)
+    pygame.draw.rect(WIN, background_board_color, (0, 0, WIDTH, HEIGHT))
     #print("[DRAWING] Drawing footer...")
     pygame.draw.rect(WIN, footer_color, (0, GAME_HEIGHT, WIDTH, (HEIGHT-GAME_HEIGHT)))
     #print("[DRAWING] Drawing divider...")
