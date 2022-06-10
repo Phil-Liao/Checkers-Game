@@ -17,8 +17,8 @@ FONT = pygame.font.SysFont("Arial", 20)
 
 
 
-def draw(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, footer_color = (255, 255, 255), divider_color = (0, 0, 0), background_board_color=(186, 140, 99), background_square_color=(0, 0, 0)):
-    #print("[UPDATING] Display updating...")
+def draw_background(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, footer_color = (255, 255, 255), divider_color = (0, 0, 0), background_board_color=(186, 140, 99), background_square_color=(0, 0, 0)):
+
     #print("[DRAWING] Drawing board color...")
     WIN.fill(background_board_color)
     #print("[DRAWING] Drawing footer...")
@@ -28,8 +28,7 @@ def draw(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, footer_color = (255, 255, 
     #print("[DRAWING] Drawing squares...")
     draw_bg_square(WIN, GAME_WIDTH, GAME_HEIGHT, background_square_color)
 
-    pygame.display.update()
-    #print("[UPDATING] Display updated.")
+
 
 
 """
@@ -46,8 +45,11 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-    draw(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, colors["WHITE"], colors["SILVER"], colors["WOOD"], colors["BLACK"])
     
+    #print("[UPDATING] Updating display")
+    draw_background(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, colors["WHITE"], colors["SILVER"], colors["WOOD"], colors["BLACK"])
+    pygame.display.update()
+    #print("[UPDATING] Display updated.")
     
 """  
     test.redraw_button()
