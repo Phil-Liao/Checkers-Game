@@ -23,15 +23,41 @@ QUIT_GAME_BUTTON = None
 button_names = [JOIN_BUTTON, QUIT_GAME_BUTTON]
 
 
+
+
+
+
+
+
+
 def buttons(x_pos, y_pos):
-    for i in range(button_names):
-        if button_names[i].click(x_pos, y_pos):
+    for i in button_names:
+        i.redraw_button()
+        if i.click(x_pos, y_pos):
             if button_names[i] == JOIN_BUTTON:
                 #send to server: Join game
+                pass
             elif button_names[i] == QUIT_GAME_BUTTON:
                 #send to server: Quit game
-
+                pass
         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def draw_background(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, footer_color = (255, 255, 255), divider_color = (0, 0, 0), background_board_color=(186, 140, 99), background_square_color=(0, 0, 0)):
 
@@ -76,4 +102,3 @@ while True:
     test.click(101, 101)
     pygame.display.update()
 """
-    
