@@ -24,12 +24,6 @@ button_names = [JOIN_BUTTON, QUIT_GAME_BUTTON]
 
 
 
-
-
-
-
-
-
 def buttons(x_pos, y_pos):
     for i in button_names:
         i.redraw_button()
@@ -41,13 +35,20 @@ def buttons(x_pos, y_pos):
                 #send to server: Quit game
                 pass
         
+my_info = (WIN, colors["RED"], colors["PINK"], GAME_WIDTH, GAME_HEIGHT)
 
+my_checker_info = {}
+for i in range(0, 8, 1):
+    insert_info = [my_info[_] for _ in range(0, len(my_info))]
+    insert_info.insert(1, (i+1))
+    insert_info.append((my_info[3]/8*i))
+    insert_info.append((my_info[4]/8*i))
+    insert_info.append(colors["ORANGE"])
+    my_checker_info.append(insert_info)
 
-
-
-
-
-
+checkers = []
+for i in range(0, len(my_checker_info), 1):
+    checkers.append(checker(_ for _ in my_checker_info[i]))
 
 
 
