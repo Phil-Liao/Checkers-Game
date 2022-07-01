@@ -37,7 +37,7 @@ def buttons(x_pos, y_pos):
         
 my_info = (WIN, colors["RED"], colors["PINK"], GAME_WIDTH, GAME_HEIGHT)
 
-my_checker_info = {}
+my_checker_info = []
 for i in range(0, 8, 1):
     insert_info = [my_info[_] for _ in range(0, len(my_info))]
     insert_info.insert(1, (i+1))
@@ -48,7 +48,8 @@ for i in range(0, 8, 1):
 
 checkers = []
 for i in range(0, len(my_checker_info), 1):
-    checkers.append(checker(_ for _ in my_checker_info[i]))
+    info_1, info_2, info_3, info_4, info_5, info_6, info_7, info_8, info_9 = my_checker_info[i]
+    checkers.append(checker(info_1, info_2, info_3, info_4, info_5, info_6, info_7, info_8, info_9))
 
 
 
