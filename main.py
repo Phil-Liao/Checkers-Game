@@ -46,15 +46,13 @@ for i in range(0, 12, 1):
         insert_info.append(((((my_info[3]/8)*i)*2)+((my_info[3]/8)/2)))
         insert_info.append((((my_info[4]/8)*5)+((my_info[4]/8)/2)))
     elif 4 <= i < 8:
-        insert_info.append((((((my_info[3]/8)*(i-4)*2)))+((my_info[3]/8)*1.5)))
-        print((((my_info[3]/8)*(i-3))))
+        insert_info.append(((((((my_info[3]/8)*(i-4))*2)))+((my_info[3]/8)*1.5)))
         insert_info.append((((my_info[4]/8)*6)+((my_info[4]/8)/2)))
     else:
-        insert_info.append(((((my_info[3]/8)*i)*2)+((my_info[3]/8)/2)))
+        insert_info.append(((((my_info[3]/8)*(i-8))*2)+((my_info[3]/8)/2)))
         insert_info.append((((my_info[4]/8)*7)+((my_info[4]/8)/2)))
     insert_info.append(colors["ORANGE"])
     my_checker_info.append(insert_info)
-
 
 checkers = []
 for i in range(0, len(my_checker_info), 1):
