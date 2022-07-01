@@ -10,18 +10,16 @@ HEIGHT = WIDTH + 100
 
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Checkers")
+pygame.display.set_caption("my_checkers")
 
-FONT = pygame.font.SysFont("Arial", 20)
-
-
-
-
+MAIN_FONT = pygame.font.SysFont("Arial", 20)
 
 JOIN_BUTTON = None
 QUIT_GAME_BUTTON = None
 button_names = [JOIN_BUTTON, QUIT_GAME_BUTTON]
 
+my_info = (WIN, colors["RED"], colors["PINK"], GAME_WIDTH, GAME_HEIGHT)
+opp_info = (WIN, colors["GRAY"], colors["SILVER"], GAME_WIDTH, GAME_HEIGHT)
 
 
 def buttons(x_pos, y_pos):
@@ -35,13 +33,11 @@ def buttons(x_pos, y_pos):
                 #send to server: Quit game
                 pass
         
-my_info = (WIN, colors["RED"], colors["PINK"], GAME_WIDTH, GAME_HEIGHT)
 
 my_checker_info = []
 for i in range(0, 12, 1):
-    insert_info = [my_info[_] for _ in range(0, len(my_info))]
+    insert_info = [my_info[_] for _ in range(0, len(my_info), 1)]
     insert_info.insert(1, (i+1))
-
     if i < 4:
         insert_info.append(((((my_info[3]/8)*i)*2)+((my_info[3]/8)/2)))
         insert_info.append((((my_info[4]/8)*5)+((my_info[4]/8)/2)))
@@ -53,23 +49,37 @@ for i in range(0, 12, 1):
         insert_info.append((((my_info[4]/8)*7)+((my_info[4]/8)/2)))
     insert_info.append(colors["ORANGE"])
     my_checker_info.append(insert_info)
-
-checkers = []
+my_checkers = []
 for i in range(0, len(my_checker_info), 1):
     info_1, info_2, info_3, info_4, info_5, info_6, info_7, info_8, info_9 = my_checker_info[i]
-    checkers.append(checker(info_1, info_2, info_3, info_4, info_5, info_6, info_7, info_8, info_9))
+    my_checkers.append(checker(info_1, info_2, info_3, info_4, info_5, info_6, info_7, info_8, info_9))
 
 
+opp_checker_info = []
+for i in range(0, 12, 1):
+    insert_info = [opp_info[_] for _ in range(0, len(opp_info), 1)]
+    insert_info.insert(1, (i+1))
+    if i < 4:
+        insert_info.append(((((opp_info[3]/8)*i)*2)+((opp_info[3]/8)*1.5)))
+        insert_info.append((((opp_info[4]/8)*0)+((opp_info[4]/8)/2)))
+    elif 4 <= i < 8:
+        insert_info.append((((((opp_info[3]/8)*(i-4)*2)))+((opp_info[3]/8)/2)))
+        insert_info.append((((opp_info[4]/8)*1)+((opp_info[4]/8)/2)))
+    else:
+        insert_info.append(((((opp_info[3]/8)*(i-8))*2)+((opp_info[3]/8)*1.5)))
+        insert_info.append((((opp_info[4]/8)*2)+((opp_info[4]/8)/2)))
+    insert_info.append(colors["BROWN"])
+    opp_checker_info.append(insert_info)
+print(opp_checker_info)
+opp_checkers = []
+for i in range(0, len(opp_checker_info), 1):
+    info, info_2, info_3, info_4, info_5, info_6, info_7, info_8, info_9 = opp_checker_info[i]
+    opp_checkers.append(checker(info, info_2, info_3, info_4, info_5, info_6, info_7, info_8, info_9))
 
 
 def draw_checker(checker):
     #print("[DRAWING] Drawing checker pieces...")
     checker.redraw_checker()
-
-
-
-
-
 
 def draw_background(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, footer_color = (255, 255, 255), divider_color = (0, 0, 0), background_board_color=(186, 140, 99), background_square_color=(0, 0, 0)):
 
@@ -82,12 +92,6 @@ def draw_background(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, footer_color = 
     #print("[DRAWING] Drawing squares...")
     draw_bg_square(WIN, GAME_WIDTH, GAME_HEIGHT, background_square_color)
 
-
-
-
-"""
-test = button(WIN, 50, 50, 50, 50, (255, 0, 0), True, 5, (192, 192, 192), True, "Test", FONT, (0, 0, 0))
-"""
 
 clock = pygame.time.Clock()
 FPS = 60
@@ -106,7 +110,9 @@ while True:
 
     #print("[UPDATING] Updating display")
     draw_background(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, colors["WHITE"], colors["SILVER"], colors["WOOD"], colors["BLACK"])
-    for i in checkers:
+    for i in my_checkers:
+        draw_checker(i)
+    for i in opp_checkers:
         draw_checker(i)
     pygame.display.update()
     #print("[UPDATING] Display updated.")
