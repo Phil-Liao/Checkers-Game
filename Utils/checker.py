@@ -23,11 +23,11 @@ class checker:
         pygame.draw.circle(self.WIN, self.checker_color, (self.x, self.y), self.checker_radius)
         if (self.GAME_HEIGHT-self.y) == (self.GAME_HEIGHT/8/2):
             self.king_checker = True
-        if self.king_checker:
-            pygame.draw.circle(self.WIN, self.king_checker_color(self.x, self.y), self.king_checker_radius)
+        #if self.king_checker:
+            #pygame.draw.circle(self.WIN, self.king_checker_color(self.x, self.y), self.king_checker_radius)
         if self.cursor_touched:
             pygame.draw.circle(self.WIN, self.on_click_color, (self.x, self.y), self.on_click_radius)
-                    #print("[DRAWNG] Drawing the clicking orage circle...")
+            #print("[DRAWNG] Drawing the clicking orage circle...")
 
 
     def get_information(self):

@@ -38,13 +38,23 @@ def buttons(x_pos, y_pos):
 my_info = (WIN, colors["RED"], colors["PINK"], GAME_WIDTH, GAME_HEIGHT)
 
 my_checker_info = []
-for i in range(0, 8, 1):
+for i in range(0, 12, 1):
     insert_info = [my_info[_] for _ in range(0, len(my_info))]
     insert_info.insert(1, (i+1))
-    insert_info.append((my_info[3]/8*i))
-    insert_info.append((my_info[4]/8*i))
+
+    if i < 4:
+        insert_info.append(((((my_info[3]/8)*i)*2)+((my_info[3]/8)/2)))
+        insert_info.append((((my_info[4]/8)*5)+((my_info[4]/8)/2)))
+    elif 4 <= i < 8:
+        insert_info.append((((((my_info[3]/8)*(i-4)*2)))+((my_info[3]/8)*1.5)))
+        print((((my_info[3]/8)*(i-3))))
+        insert_info.append((((my_info[4]/8)*6)+((my_info[4]/8)/2)))
+    else:
+        insert_info.append(((((my_info[3]/8)*i)*2)+((my_info[3]/8)/2)))
+        insert_info.append((((my_info[4]/8)*7)+((my_info[4]/8)/2)))
     insert_info.append(colors["ORANGE"])
     my_checker_info.append(insert_info)
+
 
 checkers = []
 for i in range(0, len(my_checker_info), 1):
@@ -54,7 +64,9 @@ for i in range(0, len(my_checker_info), 1):
 
 
 
-
+def draw_checker(checker):
+    #print("[DRAWING] Drawing checker pieces...")
+    checker.redraw_checker()
 
 
 
@@ -96,6 +108,8 @@ while True:
 
     #print("[UPDATING] Updating display")
     draw_background(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, colors["WHITE"], colors["SILVER"], colors["WOOD"], colors["BLACK"])
+    for i in checkers:
+        draw_checker(i)
     pygame.display.update()
     #print("[UPDATING] Display updated.")
     
