@@ -1,3 +1,4 @@
+from msilib.schema import Font
 import pygame
 from Utils.bg_square import draw_bg_square
 from Utils.checker import checker
@@ -12,27 +13,19 @@ HEIGHT = WIDTH + 100
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("my_checkers")
 
-MAIN_FONT = pygame.font.SysFont("Arial", 20)
+FONT = "Arial"
+MAIN_FONT = pygame.font.SysFont(FONT, 24)
+TITLE_FONT = pygame.font.SysFont(FONT, 30)
 
-JOIN_BUTTON = None
-QUIT_GAME_BUTTON = None
-button_names = [JOIN_BUTTON, QUIT_GAME_BUTTON]
+
+
+phase = 0
 
 my_info = (WIN, colors["RED"], colors["PINK"], GAME_WIDTH, GAME_HEIGHT)
 opp_info = (WIN, colors["GRAY"], colors["SILVER"], GAME_WIDTH, GAME_HEIGHT)
 
 
-def buttons(x_pos, y_pos):
-    for i in button_names:
-        i.redraw_button()
-        if i.click(x_pos, y_pos):
-            if button_names[i] == JOIN_BUTTON:
-                #send to server: Join game
-                pass
-            elif button_names[i] == QUIT_GAME_BUTTON:
-                #send to server: Quit game
-                pass
-        
+
 
 my_checker_info = []
 for i in range(0, 12, 1):
@@ -49,6 +42,7 @@ for i in range(0, 12, 1):
         insert_info.append((((my_info[4]/8)*7)+((my_info[4]/8)/2)))
     insert_info.append(colors["ORANGE"])
     my_checker_info.append(insert_info)
+#print(my_checker_info)
 my_checkers = []
 for i in range(0, len(my_checker_info), 1):
     info_1, info_2, info_3, info_4, info_5, info_6, info_7, info_8, info_9 = my_checker_info[i]
@@ -70,16 +64,38 @@ for i in range(0, 12, 1):
         insert_info.append((((opp_info[4]/8)*2)+((opp_info[4]/8)/2)))
     insert_info.append(colors["BROWN"])
     opp_checker_info.append(insert_info)
-print(opp_checker_info)
+#print(opp_checker_info)
 opp_checkers = []
 for i in range(0, len(opp_checker_info), 1):
     info, info_2, info_3, info_4, info_5, info_6, info_7, info_8, info_9 = opp_checker_info[i]
     opp_checkers.append(checker(info, info_2, info_3, info_4, info_5, info_6, info_7, info_8, info_9))
 
 
-def draw_checker(checker):
+def start_menu(WIN, WIDTH, HEIGHT, FONT_COLOR, FONT = TITLE_FONT, BG_COLOR=colors["WOOD"], TITLE_TEXT="Checkers Game by Phil Liao"):
+
+    pygame.draw.rect(WIN, BG_COLOR, (0, 0, WIDTH, HEIGHT))
+    text = FONT.render(TITLE_TEXT, True, FONT_COLOR)
+    area = text.get_rect(center=(WIDTH/2, HEIGHT/8)) 
+    WIN.blit(text, area)
+
+
+
+
+
+
+
+
+
+
+
+
+
+def draw_checker(checker, my_checker=False):
     #print("[DRAWING] Drawing checker pieces...")
     checker.redraw_checker()
+    #print("[CHECKING] Checking if king checker.")
+    if my_checker:
+        checker.check_king_checker()
 
 def draw_background(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, footer_color = (255, 255, 255), divider_color = (0, 0, 0), background_board_color=(186, 140, 99), background_square_color=(0, 0, 0)):
 
@@ -104,19 +120,21 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
     #if pygame.mouse.get_pressed[0]:
-    #    pass
+        #pass
 
-
-
-    #print("[UPDATING] Updating display")
-    draw_background(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, colors["WHITE"], colors["SILVER"], colors["WOOD"], colors["BLACK"])
-    for i in my_checkers:
-        draw_checker(i)
-    for i in opp_checkers:
-        draw_checker(i)
+    if phase == 0:
+        start_menu(WIN, WIDTH, HEIGHT, colors["BLACK"] , TITLE_FONT, colors["WOOD"], "Checkers Game by Phil Liao")
+    elif phase == 1:
+        #print("[UPDATING] Updating display")
+        draw_background(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, colors["WHITE"], colors["SILVER"], colors["WOOD"], colors["BLACK"])
+        for i in my_checkers:
+            draw_checker(i, True)
+        for i in opp_checkers:
+            draw_checker(i, False)       
+    else:
+        pass
     pygame.display.update()
-    #print("[UPDATING] Display updated.")
-    
+        #print("[UPDATING] Display updated.")
 """  
     test.redraw_button()
     test.click(101, 101)
