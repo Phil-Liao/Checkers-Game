@@ -1,5 +1,4 @@
 import socket
-from sqlite3 import connect
 import threading
 
 class network:
@@ -8,7 +7,7 @@ class network:
         self.PORT = 5050
         self.FORMAT = "utf-8"
         self.DISCONNECT_MESSAGE = "!Disconnected!"
-        self.SERVER = "172.20.10.3"
+        self.SERVER = "192.168.0.104"
         self.ADDR = (self.SERVER, self.PORT)
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client.connect(self.ADDR)
@@ -25,3 +24,4 @@ class network:
     
     def receive(self, receive_message):
         pass
+

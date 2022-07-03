@@ -24,17 +24,20 @@ class checker:
         return information
 
 
-    def move(self, cursor_x_1, cursor_y_1, cursor_x_2, cursor_y_2):
-        x_pos_true = (self.x-(self.GAME_WIDTH/8/2)) < cursor_x_1 < (self.x+(self.GAME_WIDTH/8/2))
-        y_pos_true = (self.y-(self.GAME_HEIGHT/8/2)) < cursor_y_1 < (self.x+(self.GAME_HEIGHT/8/2))
-        if x_pos_true and y_pos_true:
-            self.cursor_touched = True
-            
-        if self.cursor_touched:
-            new_x, new_y = functions.closest_to_point(cursor_x_2, cursor_y_2, self.GAME_WIDTH, self.GAME_HEIGHT)
+    def move(self, x, y):
+        if not(self.cursor_touched):
+            x_pos_true = (self.x-(self.GAME_WIDTH/8/2)) < x < (self.x+(self.GAME_WIDTH/8/2))
+            y_pos_true = (self.y-(self.GAME_HEIGHT/8/2)) < y < (self.x+(self.GAME_HEIGHT/8/2))
+            if x_pos_true and y_pos_true:
+                self.cursor_touched = True
+
+        """        
+        elif self.cursor_touched:
+            new_x, new_y = functions.closest_to_point(x, y, self.GAME_WIDTH, self.GAME_HEIGHT)
             #print(f"[CHANGING] Changing (x, y) from ({self.x}, {self.y}) to ({new_x}, {new_y})...")
             self.x, self.y = new_x, new_y
             self.cursor_touched = False
+        """
 
     def check_king_checker(self):
         if self.y == (self.GAME_HEIGHT/8/2):

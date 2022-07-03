@@ -14,7 +14,7 @@ def key_in_dict(dict, value):
             return i + 1
 
 def closest_to_point(x, y, GAME_WIDTH, GAME_HEIGHT):
-    for x_axis in range(0, GAME_WIDTH, GAME_WIDTH/8):
+    for x_axis in range(0, float(GAME_WIDTH), float(GAME_WIDTH/8)):
         if 0 < x - x_axis < GAME_WIDTH / 8:
             return_x = x_axis
             break
