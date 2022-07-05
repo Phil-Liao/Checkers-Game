@@ -121,7 +121,6 @@ def click(x, y, my_checkers, phase=0):
         pass
     elif phase == 1:
         for i in my_checkers:
-            print(x, y)
             i.move(x, y)
     else:
         pass

@@ -1,6 +1,19 @@
 import functions
 import pygame
 
+
+def closest_to_point(x, y, GAME_WIDTH, GAME_HEIGHT):
+    GAME_WIDTH, GAME_HEIGHT = float(GAME_WIDTH), float(GAME_HEIGHT)
+    for i in range(0, 8, 1):
+        if i*(GAME_WIDTH/8) > x:
+            point_x = (i*(GAME_WIDTH/8)) - ((GAME_WIDTH/8)/2)
+            break
+    for i in range(0, 8, 1):
+        if i*(GAME_HEIGHT/8) > y:
+            point_y = (i*(GAME_HEIGHT/8)) - ((GAME_HEIGHT/8)/2)
+            break
+    return point_x, point_y
+
 class checker:
     def __init__(self, WIN, checker_id, checker_color, king_checker_color, GAME_WIDTH, GAME_HEIGHT, x, y, on_click_color):
         self.WIN = WIN
@@ -26,18 +39,19 @@ class checker:
 
     def move(self, x, y):
         if not(self.cursor_touched):
-            x_pos_true = (self.x-(self.GAME_WIDTH/8/2)) < x < (self.x+(self.GAME_WIDTH/8/2))
-            y_pos_true = (self.y-(self.GAME_HEIGHT/8/2)) < y < (self.x+(self.GAME_HEIGHT/8/2))
-            if x_pos_true and y_pos_true:
+            x_pos = (self.x-self.checker_radius) < x < (self.x+self.checker_radius)
+            y_pos = (self.y-self.checker_radius) < y < (self.y+self.checker_radius)
+            if x_pos and y_pos:
                 self.cursor_touched = True
-
-        """        
         elif self.cursor_touched:
-            new_x, new_y = functions.closest_to_point(x, y, self.GAME_WIDTH, self.GAME_HEIGHT)
-            #print(f"[CHANGING] Changing (x, y) from ({self.x}, {self.y}) to ({new_x}, {new_y})...")
-            self.x, self.y = new_x, new_y
+            x_pos, y_pos = closest_to_point(x, y, self.GAME_WIDTH, self.GAME_HEIGHT)
+            print(x_pos, y_pos, "a")
+            self.x, self.y = x_pos, y_pos
             self.cursor_touched = False
-        """
+            
+
+
+
 
     def check_king_checker(self):
         if self.y == (self.GAME_HEIGHT/8/2):
@@ -49,4 +63,4 @@ class checker:
             pygame.draw.circle(self.WIN, self.king_checker_color, (self.x, self.y), self.king_checker_radius)
         if self.cursor_touched:
             pygame.draw.circle(self.WIN, self.on_click_color, (self.x, self.y), self.on_click_radius)
-            #print("[DRAWNG] Drawing the clicking orage circle...")    
+            #print(f"[DRAWNG] Drawing the clicking circle in the color of RGB({self.on_click_color})...")    
