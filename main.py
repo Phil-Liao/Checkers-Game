@@ -19,14 +19,10 @@ FONT = "Arial"
 MAIN_FONT = pygame.font.SysFont(FONT, 24)
 TITLE_FONT = pygame.font.SysFont(FONT, 30)
 
-
-
 phase = 1
 
 my_info = (WIN, colors["RED"], colors["PINK"], GAME_WIDTH, GAME_HEIGHT)
 opp_info = (WIN, colors["GRAY"], colors["SILVER"], GAME_WIDTH, GAME_HEIGHT)
-
-
 
 
 my_checker_info = []
@@ -73,26 +69,11 @@ for i in range(0, len(opp_checker_info), 1):
     opp_checkers.append(checker(info, info_2, info_3, info_4, info_5, info_6, info_7, info_8, info_9))
 
 
-
-
-
-
 def start_menu(WIN, WIDTH, HEIGHT, FONT_COLOR, FONT = TITLE_FONT, BG_COLOR=colors["WOOD"], TITLE_TEXT="Checkers Game by Phil Liao"):
     pygame.draw.rect(WIN, BG_COLOR, (0, 0, WIDTH, HEIGHT))
     text = FONT.render(TITLE_TEXT, True, FONT_COLOR)
     area = text.get_rect(center=(WIDTH/2, HEIGHT/8)) 
     WIN.blit(text, area)
-
-
-
-
-
-
-
-
-
-
-
 
 def draw_background(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, footer_color = (255, 255, 255), divider_color = (0, 0, 0), background_board_color=(186, 140, 99), background_square_color=(0, 0, 0)):
 
@@ -124,12 +105,6 @@ def click(x, y, my_checkers, phase=0):
             i.move(x, y)
     else:
         pass
-
-
-
-
-
-
 
 
 clock = pygame.time.Clock()
