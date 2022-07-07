@@ -37,7 +37,7 @@ class checker:
         return information
 
 
-    def move(self, x, y):
+    def move(self, x, y, x_y):
         if not(self.cursor_touched):
             x_pos = (self.x-self.checker_radius) < x < (self.x+self.checker_radius)
             y_pos = (self.y-self.checker_radius) < y < (self.y+self.checker_radius)
@@ -45,11 +45,19 @@ class checker:
                 self.cursor_touched = True
         elif self.cursor_touched:
             x_pos, y_pos = closest_to_point(x, y, self.GAME_WIDTH, self.GAME_HEIGHT)
-            print(x_pos, y_pos, "a")
-            self.x, self.y = x_pos, y_pos
-            self.cursor_touched = False
+            if (x_pos == self.x) and (y_pos == self.y):
+                self.cursor_touched = False
+            elif (abs(x_pos-self.x) == (self.GAME_WIDTH/8)) and (abs(y_pos-self.y) == (self.GAME_HEIGHT/8)):
+                on_top = False
+                for i in x_y:
+                    if i == (x_pos, y_pos):
+                        on_top = True
+                        self.cursor_touched = False
+                        break
+                if not(on_top):
+                    self.x, self.y = x_pos, y_pos
+                    self.cursor_touched = False
             
-
 
 
 

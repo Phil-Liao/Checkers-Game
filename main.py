@@ -101,8 +101,12 @@ def click(x, y, my_checkers, phase=0):
     if phase == 0:
         pass
     elif phase == 1:
+        collide = []
         for i in my_checkers:
-            i.move(x, y)
+            x_y = (i.get_information()['x'], i.get_information()['y'])
+            collide.append(x_y)
+        for i in my_checkers:
+            i.move(x, y, collide)
     else:
         pass
 
