@@ -4,6 +4,7 @@ import pygame
 
 def closest_to_point(x, y, GAME_WIDTH, GAME_HEIGHT):
     GAME_WIDTH, GAME_HEIGHT = float(GAME_WIDTH), float(GAME_HEIGHT)
+    point_x, point_y = None, None
     for i in range(0, 8, 1):
         if i*(GAME_WIDTH/8) > x:
             point_x = (i*(GAME_WIDTH/8)) - ((GAME_WIDTH/8)/2)
