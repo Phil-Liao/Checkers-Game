@@ -1,19 +1,17 @@
-import functions
 import pygame
 
 
 def closest_to_point(x, y, GAME_WIDTH, GAME_HEIGHT):
     GAME_WIDTH, GAME_HEIGHT = float(GAME_WIDTH), float(GAME_HEIGHT)
-    point_x, point_y = None, None
-    for i in range(0, 8, 1):
+    for i in range(0, 9, 1):
         if i*(GAME_WIDTH/8) > x:
-            point_x = (i*(GAME_WIDTH/8)) - ((GAME_WIDTH/8)/2)
+            x = (i*(GAME_WIDTH/8)) - ((GAME_WIDTH/8)/2)
             break
-    for i in range(0, 8, 1):
+    for i in range(0, 9, 1):
         if i*(GAME_HEIGHT/8) > y:
-            point_y = (i*(GAME_HEIGHT/8)) - ((GAME_HEIGHT/8)/2)
+            y = (i*(GAME_HEIGHT/8)) - ((GAME_HEIGHT/8)/2)
             break
-    return point_x, point_y
+    return x, y
 
 class checker:
     def __init__(self, WIN, checker_id, checker_color, king_checker_color, GAME_WIDTH, GAME_HEIGHT, x, y, on_click_color):
@@ -44,22 +42,17 @@ class checker:
             y_pos = (self.y-self.checker_radius) < y < (self.y+self.checker_radius)
             if x_pos and y_pos:
                 self.cursor_touched = True
+                return self.cursor_touched
         elif self.cursor_touched:
             x_pos, y_pos = closest_to_point(x, y, self.GAME_WIDTH, self.GAME_HEIGHT)
             if (x_pos == self.x) and (y_pos == self.y):
                 self.cursor_touched = False
-            elif (abs(x_pos-self.x) == (self.GAME_WIDTH/8)) and (abs(y_pos-self.y) == (self.GAME_HEIGHT/8)):
-                on_top = False
-                for i in x_y:
-                    if i == (x_pos, y_pos):
-                        on_top = True
-                        self.cursor_touched = False
-                        break
-                if not(on_top):
-                    self.x, self.y = x_pos, y_pos
-                    self.cursor_touched = False
+            rqed_1 = (((abs(x_pos-self.x))%(self.GAME_WIDTH/8)) and (abs(y_pos-self.y)%(self.GAME_HEIGHT/8))) == 0
+            rqed_2 = (x_pos<self.GAME_WIDTH) and (y_pos<self.GAME_HEIGHT)
             
-
+            if rqed_1 and rqed_2:
+                self.x, self.y = x_pos, y_pos
+                self.cursor_touched = False
 
 
     def check_king_checker(self):
