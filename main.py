@@ -1,4 +1,3 @@
-from msilib.schema import Font
 import pygame
 from Utils.bg_square import draw_bg_square
 from Utils.checker import checker
