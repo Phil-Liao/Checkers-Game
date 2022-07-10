@@ -101,13 +101,15 @@ def click(x, y, my_checkers, phase=0):
         pass
     elif phase == 1:
         collide = []
-
+        remove_x_y = None
         for i in my_checkers:
             x_y = (i.get_information()['x'], i.get_information()['y'])
             collide.append(x_y)
         for i in my_checkers:
-            remove = i.move(x, y, collide)
-
+            remove = i.move(x, y, collide, remove_x_y)
+            if remove:
+                remove_x_y = (i.get_information()['x'], i.get_information()['y'])
+            print(remove_x_y)
     else:
         pass
 

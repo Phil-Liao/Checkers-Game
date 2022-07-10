@@ -37,7 +37,7 @@ class checker:
         return information
 
 
-    def move(self, x, y, x_y):
+    def move(self, x, y, x_y, remove_x_y):
         if not(self.cursor_touched):
             x_pos = (self.x-self.checker_radius) < x < (self.x+self.checker_radius)
             y_pos = (self.y-self.checker_radius) < y < (self.y+self.checker_radius)
@@ -51,9 +51,11 @@ class checker:
             rqed_1 = (((abs(x_pos-self.x))%(self.GAME_WIDTH/8)) and (abs(y_pos-self.y)%(self.GAME_HEIGHT/8))) == 0
             rqed_2 = not(functions.is_odd((((abs(x_pos-self.x))/(self.GAME_WIDTH/8))+(abs(y_pos-self.y)/(self.GAME_HEIGHT/8)))))
             rqed_3 = (x_pos<self.GAME_WIDTH) and (y_pos<self.GAME_HEIGHT)
-            
+            print(remove_x_y)
+            rqed_4 = x_y.remove(remove_x_y)
             if rqed_1 and rqed_2 and rqed_3:
                 self.x, self.y = x_pos, y_pos
+                remove_x_y = tuple(list(remove_x_y).clear())
                 self.cursor_touched = False
 
 
