@@ -1,3 +1,4 @@
+import functions
 import pygame
 
 
@@ -48,9 +49,10 @@ class checker:
             if (x_pos == self.x) and (y_pos == self.y):
                 self.cursor_touched = False
             rqed_1 = (((abs(x_pos-self.x))%(self.GAME_WIDTH/8)) and (abs(y_pos-self.y)%(self.GAME_HEIGHT/8))) == 0
-            rqed_2 = (x_pos<self.GAME_WIDTH) and (y_pos<self.GAME_HEIGHT)
+            rqed_2 = not(functions.is_odd((((abs(x_pos-self.x))/(self.GAME_WIDTH/8))+(abs(y_pos-self.y)/(self.GAME_HEIGHT/8)))))
+            rqed_3 = (x_pos<self.GAME_WIDTH) and (y_pos<self.GAME_HEIGHT)
             
-            if rqed_1 and rqed_2:
+            if rqed_1 and rqed_2 and rqed_3:
                 self.x, self.y = x_pos, y_pos
                 self.cursor_touched = False
 
