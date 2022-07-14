@@ -95,21 +95,22 @@ def draw_checker(my_checker, opp_checker):
         i.redraw_checker()
         #print("[DRAWING] Drawing checker pieces...")
 
-
-def click(x, y, my_checkers, phase=0):
+remove_x_y = None
+def click(x, y, my_checkers, remove_x_y, phase=0):
     if phase == 0:
         pass
     elif phase == 1:
         collide = []
-        remove_x_y = None
         for i in my_checkers:
             x_y = (i.get_information()['x'], i.get_information()['y'])
             collide.append(x_y)
+        print(f"collide = {collide}")
         for i in my_checkers:
             remove = i.move(x, y, collide, remove_x_y)
             if remove:
                 remove_x_y = (i.get_information()['x'], i.get_information()['y'])
             print(remove_x_y)
+        return remove_x_y
     else:
         pass
 
@@ -126,7 +127,7 @@ while True:
             pygame.quit()
         if event.type == pygame.MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
-            click(pos[0], pos[1], my_checkers, phase)
+            remove_x_y = click(pos[0], pos[1], my_checkers, remove_x_y, phase)
             
 
     if phase == 0:

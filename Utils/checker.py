@@ -38,6 +38,7 @@ class checker:
 
 
     def move(self, x, y, x_y, remove_x_y):
+        print(f"x_y = {x_y}")
         if not(self.cursor_touched):
             x_pos = (self.x-self.checker_radius) < x < (self.x+self.checker_radius)
             y_pos = (self.y-self.checker_radius) < y < (self.y+self.checker_radius)
@@ -48,16 +49,20 @@ class checker:
             x_pos, y_pos = closest_to_point(x, y, self.GAME_WIDTH, self.GAME_HEIGHT)
             if (x_pos == self.x) and (y_pos == self.y):
                 self.cursor_touched = False
+            print(f"x_y = {x_y}")
+            print(f"remove_x_y = {remove_x_y}")
+            for i in x_y:
+                if i == remove_x_y:
+                    x_y.remove(i)
             rqed_1 = (((abs(x_pos-self.x))%(self.GAME_WIDTH/8)) and (abs(y_pos-self.y)%(self.GAME_HEIGHT/8))) == 0
             rqed_2 = not(functions.is_odd((((abs(x_pos-self.x))/(self.GAME_WIDTH/8))+(abs(y_pos-self.y)/(self.GAME_HEIGHT/8)))))
             rqed_3 = (x_pos<self.GAME_WIDTH) and (y_pos<self.GAME_HEIGHT)
-            print(remove_x_y)
-            rqed_4 = x_y.remove(remove_x_y)
-            if rqed_1 and rqed_2 and rqed_3:
+            rqed_4 = (x, y) != (i for i in x_y)
+            if rqed_1 and rqed_2 and rqed_3 and rqed_4:
                 self.x, self.y = x_pos, y_pos
-                remove_x_y = tuple(list(remove_x_y).clear())
+                remove_x_y = None
                 self.cursor_touched = False
-
+                
 
     def check_king_checker(self):
         if self.y == (self.GAME_HEIGHT/8/2):
