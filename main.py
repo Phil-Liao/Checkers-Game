@@ -102,15 +102,7 @@ def click(x, y, my_checkers, remove_x_y, phase=0):
     elif phase == 1:
         collide = []
         for i in my_checkers:
-            x_y = (i.get_information()['x'], i.get_information()['y'])
-            collide.append(x_y)
-        print(f"collide = {collide}")
-        for i in my_checkers:
-            remove = i.move(x, y, collide, remove_x_y)
-            if remove:
-                remove_x_y = (i.get_information()['x'], i.get_information()['y'])
-            print(remove_x_y)
-        return remove_x_y
+            i.move(x, y)
     else:
         pass
 
@@ -135,7 +127,7 @@ while True:
     elif phase == 1:
         #print("[UPDATING] Updating display")
         draw_background(WIN, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT, colors["WHITE"], colors["SILVER"], colors["WOOD"], colors["BLACK"])
-        draw_checker(my_checkers, opp_checkers)      
+        draw_checker(my_checkers, opp_checkers)
     else:
         pass
     pygame.display.update()

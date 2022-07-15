@@ -36,31 +36,26 @@ class checker:
         #print(information)
         return information
 
-
-    def move(self, x, y, x_y, remove_x_y):
-        print(f"x_y = {x_y}")
+    def unclick(self):
+        self.cursor_touched = False
+    def move(self, x, y):
         if not(self.cursor_touched):
             x_pos = (self.x-self.checker_radius) < x < (self.x+self.checker_radius)
             y_pos = (self.y-self.checker_radius) < y < (self.y+self.checker_radius)
             if x_pos and y_pos:
                 self.cursor_touched = True
-                return self.cursor_touched
         elif self.cursor_touched:
             x_pos, y_pos = closest_to_point(x, y, self.GAME_WIDTH, self.GAME_HEIGHT)
             if (x_pos == self.x) and (y_pos == self.y):
                 self.cursor_touched = False
-            print(f"x_y = {x_y}")
-            print(f"remove_x_y = {remove_x_y}")
-            for i in x_y:
-                if i == remove_x_y:
-                    x_y.remove(i)
             rqed_1 = (((abs(x_pos-self.x))%(self.GAME_WIDTH/8)) and (abs(y_pos-self.y)%(self.GAME_HEIGHT/8))) == 0
             rqed_2 = not(functions.is_odd((((abs(x_pos-self.x))/(self.GAME_WIDTH/8))+(abs(y_pos-self.y)/(self.GAME_HEIGHT/8)))))
             rqed_3 = (x_pos<self.GAME_WIDTH) and (y_pos<self.GAME_HEIGHT)
-            rqed_4 = (x, y) != (i for i in x_y)
-            if rqed_1 and rqed_2 and rqed_3 and rqed_4:
+
+                    
+
+            if rqed_1 and rqed_2 and rqed_3:
                 self.x, self.y = x_pos, y_pos
-                remove_x_y = None
                 self.cursor_touched = False
                 
 
