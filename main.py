@@ -100,7 +100,6 @@ def click(x, y, my_checkers, remove_x_y, phase=0):
     if phase == 0:
         pass
     elif phase == 1:
-        collide = []
         for i in my_checkers:
             i.move(x, y)
     else:
